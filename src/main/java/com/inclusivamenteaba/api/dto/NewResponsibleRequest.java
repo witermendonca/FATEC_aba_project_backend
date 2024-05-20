@@ -1,5 +1,6 @@
 package com.inclusivamenteaba.api.dto;
 
+import com.inclusivamenteaba.api.entity.Responsible;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponsibleDTO {
+public class NewResponsibleRequest {
 
     @NotBlank(message = "Nome é obrigatório")
     private String name;
@@ -28,13 +29,22 @@ public class ResponsibleDTO {
     private String email;
 
     @NotBlank
-    private String degree_of_kinship;
+    private String degreeOfKinship;
 
     @NotBlank(message = "Telefone é obrigatório")
     private String telephone;
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
+    public NewResponsibleRequest(Responsible responsible) {
+        this.name = responsible.getName();
+        this.cpf = responsible.getCpf();
+        this.email = responsible.getEmail();
+        this.degreeOfKinship = responsible.getDegreeOfKinship();
+        this.telephone = responsible.getTelephone();
+        this.createdAt = responsible.getCreatedAt();
+        this.updatedAt = responsible.getUpdatedAt();
+    }
 }

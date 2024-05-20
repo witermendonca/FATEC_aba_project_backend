@@ -32,21 +32,29 @@ public class Client {
     @Email
     private String email;
 
-    private String education_level;
+    @Column(name = "education_level")
+    private String educationLevel;
 
-    private String medical_informations;
+    @Column(name = "medical_informations")
+    private String medicalInformations;
 
-    private String medicines_in_use;
+    @Column(name = "medicines_in_use")
+    private String medicinesInUse;
 
-    private String processing_information;
+    @Column(name = "processing_information")
+    private String processingInformation;
 
-    private LocalDateTime created_at = LocalDateTime.now();
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updated_at;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
-    private String created_by;
+    @Column(name = "created_by")
+    private String createdBy;
 
-    private String updated_by;
+    @Column(name = "updated_by")
+    private String updatedBy;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -57,6 +65,10 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("client")
     private List<Responsible> responsible;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("client")
+    private List<Protocol> protocols;
 
     public Client(
             String name,
@@ -78,11 +90,11 @@ public class Client {
         this.cpf = cpf;
         this.telephone = telephone;
         this.email = email;
-        this.education_level = educationLevel;
-        this.medical_informations = medicalInformations;
-        this.medicines_in_use = medicinesInUse;
-        this.processing_information = processingInformation;
-        this.created_by = createdBy;
+        this.educationLevel = educationLevel;
+        this.medicalInformations = medicalInformations;
+        this.medicinesInUse = medicinesInUse;
+        this.processingInformation = processingInformation;
+        this.createdBy = createdBy;
         this.gender = gender;
         this.address = address;
         this.setResponsible(responsible);
@@ -109,20 +121,20 @@ public class Client {
         if(client.getEmail() != null) {
             this.setEmail(client.getEmail());
         }
-        if(client.getEducation_level() != null) {
-            this.setEducation_level(client.getEducation_level());
+        if(client.getEducationLevel() != null) {
+            this.setEducationLevel(client.getEducationLevel());
         }
-        if(client.getMedical_informations() != null) {
-            this.setMedical_informations(client.getMedical_informations());
+        if(client.getMedicalInformations() != null) {
+            this.setMedicalInformations(client.getMedicalInformations());
         }
-        if(client.getMedicines_in_use() != null) {
-            this.setMedicines_in_use(client.getMedicines_in_use());
+        if(client.getMedicinesInUse() != null) {
+            this.setMedicinesInUse(client.getMedicinesInUse());
         }
-        if(client.getProcessing_information() != null) {
-            this.setProcessing_information(client.getProcessing_information());
+        if(client.getProcessingInformation() != null) {
+            this.setProcessingInformation(client.getProcessingInformation());
         }
-        if(client.getUpdated_by() != null) {
-            this.setUpdated_by(client.getUpdated_by());
+        if(client.getUpdatedBy() != null) {
+            this.setUpdatedBy(client.getUpdatedBy());
         }
         if(client.getGender() != null) {
             this.setGender(client.getGender());
@@ -130,6 +142,6 @@ public class Client {
         if(client.getAddress() != null) {
             this.address.updateData(client.getAddress());
         }
-        this.setUpdated_at(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
     }
 }

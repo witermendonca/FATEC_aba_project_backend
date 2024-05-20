@@ -1,7 +1,7 @@
 package com.inclusivamenteaba.api.controller;
 
 
-import com.inclusivamenteaba.api.dto.ClientDTO;
+import com.inclusivamenteaba.api.dto.NewClientRequest;
 import com.inclusivamenteaba.api.entity.Client;
 import com.inclusivamenteaba.api.service.ClientService;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid ClientDTO clientDTO, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity create(@RequestBody @Valid NewClientRequest clientDTO, UriComponentsBuilder uriBuilder) {
         Client client = clientService.create(clientDTO);
         var uri = uriBuilder.path("/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).body(client);

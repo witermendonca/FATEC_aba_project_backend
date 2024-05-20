@@ -1,4 +1,4 @@
-CREATE TABLE client (
+CREATE TABLE IF NOT EXISTS client(
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     birthday DATE NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE client (
     updated_by VARCHAR(100)
 );
 
-CREATE TABLE responsible (
+CREATE TABLE IF NOT EXISTS responsible(
     id BIGSERIAL PRIMARY KEY,
     client_id BIGINT,
     name VARCHAR(100) NOT NULL,
@@ -34,4 +34,36 @@ CREATE TABLE responsible (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP,
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS protocol(
+    id BIGSERIAL PRIMARY KEY,
+    client_id BIGINT,
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(100) NOT NULL,
+    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS applications (
+    id BIGSERIAL PRIMARY KEY,
+    positive_percentage DOUBLE PRECISION,
+    success INTEGER,
+    failure INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(100),
+    aborted BOOLEAN,
+    reason_abortion VARCHAR(255),
+    protocol_id BIGINT,
+    FOREIGN KEY (protocol_id) REFERENCES protocol(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS attempts (
+    id BIGSERIAL PRIMARY KEY,
+    help VARCHAR(255),
+    comments VARCHAR(255),
+    attempt_number INTEGER,
+    result BOOLEAN,
+    application_id BIGINT,
+    FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE
 );

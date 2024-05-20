@@ -1,5 +1,7 @@
 package com.inclusivamenteaba.api.controller;
 
+import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
+import com.inclusivamenteaba.api.dto.ResponsibleResponse;
 import com.inclusivamenteaba.api.entity.Client;
 import com.inclusivamenteaba.api.entity.Responsible;
 import com.inclusivamenteaba.api.service.ClientService;
@@ -23,7 +25,7 @@ public class ResponsibleController {
     private final ClientService clientService;
 
     @PostMapping("/{id}")
-    public ResponseEntity create(@PathVariable Long id, @RequestBody @Valid Responsible responsible, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity create(@PathVariable Long id, @RequestBody @Valid NewResponsibleRequest responsible, UriComponentsBuilder uriBuilder) {
         Client client = clientService.findById(id);
         Responsible newResponsible = responsibleService.create(client, responsible);
         var uri = uriBuilder.path("/{id}").buildAndExpand(newResponsible.getId()).toUri();
@@ -31,19 +33,19 @@ public class ResponsibleController {
     }
 
     @GetMapping
-    public List<Responsible> getAll() {
+    public List<ResponsibleResponse> getAll() {
         return responsibleService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Responsible findById(@PathVariable Long id) {
+    public ResponsibleResponse findById(@PathVariable Long id) {
         return responsibleService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Responsible> update(@PathVariable Long id, @RequestBody @Valid Responsible responsible) {
+    public ResponseEntity<ResponsibleResponse> update(@PathVariable Long id, @RequestBody @Valid Responsible responsible) {
         Responsible updatedResponsible = responsibleService.update(id, responsible);
-        return ResponseEntity.ok(updatedResponsible);
+        return ResponseEntity.ok(new ResponsibleResponse(updatedResponsible));
     }
 
     @DeleteMapping("/{id}")

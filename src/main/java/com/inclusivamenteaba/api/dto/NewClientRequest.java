@@ -22,7 +22,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDTO {
+public class NewClientRequest {
 
     @NotBlank(message = "Nome é obrigatório")
     private String name;
@@ -44,34 +44,34 @@ public class ClientDTO {
     @Email
     private String email;
 
-    private String education_level;
+    private String educationLevel;
 
-    private String medical_informations;
+    private String medicalInformations;
 
-    private String medicines_in_use;
+    private String medicinesInUse;
 
-    private String processing_information;
+    private String processingInformation;
 
     @NotNull(message = "Endereço é obrigatório")
     @Valid
-    private AddressDTO address;
+    private NewAddressRequest address;
 
-    private String created_by;
+    private String createdBy;
 
     @Valid
     @NotNull(message = "Responsável é obrigatório")
-    private List<ResponsibleDTO> responsible;
+    private List<NewResponsibleRequest> responsible;
 
     public Client toModel() {
         Address addressEntity = address.toModel();
         List<Responsible> responsibleEntity = convertToResponsibleEntityList(responsible);
-        return new Client(name, birthday, gender, email, cpf, telephone, education_level, medical_informations,
-                medicines_in_use, processing_information, created_by, addressEntity, responsibleEntity);
+        return new Client(name, birthday, gender, email, cpf, telephone, educationLevel, medicalInformations,
+                medicinesInUse, processingInformation, createdBy, addressEntity, responsibleEntity);
     }
 
-    private List<Responsible> convertToResponsibleEntityList(List<ResponsibleDTO> responsibleDTOList) {
+    private List<Responsible> convertToResponsibleEntityList(List<NewResponsibleRequest> responsibleDTOList) {
         List<Responsible> responsibleList = new ArrayList<>();
-        for (ResponsibleDTO responsibleDTO : responsibleDTOList) {
+        for (NewResponsibleRequest responsibleDTO : responsibleDTOList) {
             Responsible responsible = new Responsible(responsibleDTO);
             responsibleList.add(responsible);
         }

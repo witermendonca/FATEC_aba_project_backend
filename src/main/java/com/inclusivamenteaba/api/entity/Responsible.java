@@ -1,6 +1,6 @@
 package com.inclusivamenteaba.api.entity;
 
-import com.inclusivamenteaba.api.dto.ResponsibleDTO;
+import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -25,24 +25,27 @@ public class Responsible {
     @Email
     private String email;
 
-    private String degree_of_kinship;
+    @Column(name = "degree_of_kinship")
+    private String degreeOfKinship;
 
     private String telephone;
 
-    private LocalDateTime created_at = LocalDateTime.now();
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updated_at;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Responsible(ResponsibleDTO responsibleDTO) {
-        this.name = responsibleDTO.getName();
-        this.cpf = responsibleDTO.getCpf();
-        this.email = responsibleDTO.getEmail();
-        this.degree_of_kinship = responsibleDTO.getDegree_of_kinship();
-        this.telephone = responsibleDTO.getTelephone();
+    public Responsible(NewResponsibleRequest responsible) {
+        this.name = responsible.getName();
+        this.cpf = responsible.getCpf();
+        this.email = responsible.getEmail();
+        this.degreeOfKinship = responsible.getDegreeOfKinship();
+        this.telephone = responsible.getTelephone();
     }
 
     public void updateData(Responsible updatedResponsible) {
@@ -55,12 +58,12 @@ public class Responsible {
         if(updatedResponsible.getEmail() != null) {
             this.setEmail(updatedResponsible.getEmail());
         }
-        if(updatedResponsible.getDegree_of_kinship() != null) {
-            this.setDegree_of_kinship(updatedResponsible.getDegree_of_kinship());
+        if(updatedResponsible.getDegreeOfKinship() != null) {
+            this.setDegreeOfKinship(updatedResponsible.getDegreeOfKinship());
         }
         if(updatedResponsible.getTelephone() != null) {
             this.setTelephone(updatedResponsible.getTelephone());
         }
-        this.setUpdated_at(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
     }
 }

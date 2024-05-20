@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDTO {
+public class NewAddressRequest {
 
     @NotBlank(message = "CEP é obrigatório")
     private String cep;
@@ -21,7 +21,7 @@ public class AddressDTO {
     private String street;
 
     @NotNull(message = "Número é obrigatório")
-    private int address_number;
+    private int addressNumber;
 
     private String complement;
 
@@ -35,6 +35,6 @@ public class AddressDTO {
     private String state;
 
     public Address toModel() {
-        return new Address(cep, street, address_number, complement, neighborhood, city, state);
+        return new Address(cep, street, addressNumber, complement, neighborhood, city, state);
     }
 }

@@ -1,6 +1,7 @@
 package com.inclusivamenteaba.api.service;
 
-import com.inclusivamenteaba.api.dto.ClientDTO;
+import com.inclusivamenteaba.api.dto.NewClientRequest;
+import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
 import com.inclusivamenteaba.api.entity.Client;
 import com.inclusivamenteaba.api.entity.Responsible;
 import com.inclusivamenteaba.api.repository.ClientRepository;
@@ -22,7 +23,7 @@ public class ClientService {
     private final ResponsibleService responsibleService;
 
     @Transactional
-    public Client create(ClientDTO clientDTO) {
+    public Client create(NewClientRequest clientDTO) {
         Client client = clientDTO.toModel();
         return repository.save(client);
     }
@@ -56,7 +57,8 @@ public class ClientService {
                     Responsible existingResponsible = existingResponsibleOpt.get();
                     existingResponsible.updateData(updatedResponsible);
                 } else {
-                    responsibleService.create(client, updatedResponsible);
+                    NewResponsibleRequest responsibleRequest = new NewResponsibleRequest(updatedResponsible);
+                    responsibleService.create(client, responsibleRequest);
                 }
             }
         }

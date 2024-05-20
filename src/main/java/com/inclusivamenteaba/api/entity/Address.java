@@ -1,5 +1,6 @@
 package com.inclusivamenteaba.api.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,8 @@ public class Address {
 
     private String street;
 
-    private Integer address_number;
+    @Column(name = "address_number")
+    private Integer addressNumber;
 
     private String complement;
 
@@ -34,8 +36,8 @@ public class Address {
         if(updatedAddress.getStreet() != null) {
             this.setStreet(updatedAddress.getStreet());
         }
-        if(updatedAddress.getAddress_number() != null) {
-            this.setAddress_number(updatedAddress.getAddress_number());
+        if(updatedAddress.getAddressNumber() != null) {
+            this.setAddressNumber(updatedAddress.getAddressNumber());
         }
         if(updatedAddress.getComplement() != null) {
             this.setComplement(updatedAddress.getComplement());
