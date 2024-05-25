@@ -1,16 +1,17 @@
 package com.inclusivamenteaba.api.service;
 
-import com.inclusivamenteaba.api.dto.NewClientRequest;
-import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
-import com.inclusivamenteaba.api.entity.Client;
-import com.inclusivamenteaba.api.entity.Responsible;
+import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.client.ClientRequest;
+import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.repository.ClientRepository;
+import com.inclusivamenteaba.api.repository.ResponsibleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +21,11 @@ import java.util.Optional;
 public class ClientService {
 
     private final ClientRepository repository;
-    private final ResponsibleService responsibleService;
+    private final ResponsibleRepository responsibleRepository;
 
     @Transactional
-    public Client create(NewClientRequest clientDTO) {
-        Client client = clientDTO.toModel();
+    public Client create(ClientRequest newClientRequest) {
+        Client client = newClientRequest.toModel();
         return repository.save(client);
     }
 
@@ -57,8 +58,9 @@ public class ClientService {
                     Responsible existingResponsible = existingResponsibleOpt.get();
                     existingResponsible.updateData(updatedResponsible);
                 } else {
-                    NewResponsibleRequest responsibleRequest = new NewResponsibleRequest(updatedResponsible);
-                    responsibleService.create(client, responsibleRequest);
+                    updatedResponsible.setClient(client);
+                    updatedResponsible.setCreatedAt(LocalDateTime.now());
+                    responsibleRepository.save(updatedResponsible);
                 }
             }
         }

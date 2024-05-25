@@ -1,6 +1,8 @@
-package com.inclusivamenteaba.api.entity;
+package com.inclusivamenteaba.api.entity.application;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.inclusivamenteaba.api.entity.attempt.Attempt;
+import com.inclusivamenteaba.api.entity.protocol.Protocol;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

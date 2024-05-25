@@ -1,6 +1,6 @@
-package com.inclusivamenteaba.api.entity;
+package com.inclusivamenteaba.api.entity.responsible;
 
-import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
+import com.inclusivamenteaba.api.entity.client.Client;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "responsible")
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 public class Responsible {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +32,7 @@ public class Responsible {
     private String telephone;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -40,12 +41,14 @@ public class Responsible {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Responsible(NewResponsibleRequest responsible) {
-        this.name = responsible.getName();
-        this.cpf = responsible.getCpf();
-        this.email = responsible.getEmail();
-        this.degreeOfKinship = responsible.getDegreeOfKinship();
-        this.telephone = responsible.getTelephone();
+    public Responsible(String name, String cpf, String email, String degreeOfKinship, String telephone, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.degreeOfKinship = degreeOfKinship;
+        this.telephone = telephone;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public void updateData(Responsible updatedResponsible) {

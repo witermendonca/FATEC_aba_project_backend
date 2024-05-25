@@ -1,4 +1,4 @@
-package com.inclusivamenteaba.api.entity;
+package com.inclusivamenteaba.api.entity.address;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

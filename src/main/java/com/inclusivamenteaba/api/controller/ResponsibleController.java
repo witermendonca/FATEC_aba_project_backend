@@ -1,9 +1,9 @@
 package com.inclusivamenteaba.api.controller;
 
-import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
-import com.inclusivamenteaba.api.dto.ResponsibleResponse;
-import com.inclusivamenteaba.api.entity.Client;
-import com.inclusivamenteaba.api.entity.Responsible;
+import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
+import com.inclusivamenteaba.api.entity.responsible.Responsible;
+import com.inclusivamenteaba.api.entity.responsible.ResponsibleResponse;
 import com.inclusivamenteaba.api.service.ClientService;
 import com.inclusivamenteaba.api.service.ResponsibleService;
 import jakarta.validation.Valid;
@@ -29,7 +29,7 @@ public class ResponsibleController {
         Client client = clientService.findById(id);
         Responsible newResponsible = responsibleService.create(client, responsible);
         var uri = uriBuilder.path("/{id}").buildAndExpand(newResponsible.getId()).toUri();
-        return ResponseEntity.created(uri).body(newResponsible);
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping

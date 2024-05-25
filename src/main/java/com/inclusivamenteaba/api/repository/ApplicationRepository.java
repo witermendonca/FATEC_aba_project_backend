@@ -1,6 +1,6 @@
 package com.inclusivamenteaba.api.repository;
 
-import com.inclusivamenteaba.api.entity.Application;
+import com.inclusivamenteaba.api.entity.application.Application;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package com.inclusivamenteaba.api.controller;
 
-import com.inclusivamenteaba.api.dto.ApplicationResponse;
-import com.inclusivamenteaba.api.dto.NewApplicationRequest;
-import com.inclusivamenteaba.api.entity.Application;
+import com.inclusivamenteaba.api.entity.application.NewApplicationRequest;
+import com.inclusivamenteaba.api.entity.application.Application;
+import com.inclusivamenteaba.api.entity.application.ApplicationResponse;
 import com.inclusivamenteaba.api.service.ApplicationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class ApplicationController {
         System.out.println(applicationDTO);
         Application application = service.create(applicationDTO);
         var uri = uriBuilder.path("/{id}").buildAndExpand(application.getId()).toUri();
-        return ResponseEntity.created(uri).body(new ApplicationResponse(application));
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping

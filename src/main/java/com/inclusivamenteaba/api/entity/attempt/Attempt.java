@@ -1,7 +1,7 @@
-package com.inclusivamenteaba.api.entity;
+package com.inclusivamenteaba.api.entity.attempt;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.inclusivamenteaba.api.dto.NewAttemptRequest;
+import com.inclusivamenteaba.api.entity.application.Application;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,9 +31,9 @@ public class Attempt {
     private Application application;
 
     public Attempt(NewAttemptRequest attempt) {
-        this.attemptNumber = attempt.getAttemptNumber();
-        this.help = attempt.getHelp();
-        this.comments = attempt.getComments();
-        this.result = attempt.getResult();
+        this.attemptNumber = attempt.attemptNumber();
+        this.help = attempt.help();
+        this.comments = attempt.comments();
+        this.result = attempt.result();
     }
 }

@@ -1,11 +1,9 @@
 package com.inclusivamenteaba.api.service;
 
-import com.inclusivamenteaba.api.dto.NewResponsibleRequest;
-import com.inclusivamenteaba.api.dto.ProtocolResponse;
-import com.inclusivamenteaba.api.dto.ResponsibleResponse;
-import com.inclusivamenteaba.api.entity.Client;
-import com.inclusivamenteaba.api.entity.Protocol;
-import com.inclusivamenteaba.api.entity.Responsible;
+import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
+import com.inclusivamenteaba.api.entity.responsible.Responsible;
+import com.inclusivamenteaba.api.entity.responsible.ResponsibleResponse;
 import com.inclusivamenteaba.api.repository.ResponsibleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -24,7 +22,7 @@ public class ResponsibleService {
 
     @Transactional
     public Responsible create(Client client, NewResponsibleRequest responsible) {
-        Responsible newResponsible = new Responsible(responsible);
+        Responsible newResponsible = responsible.toModel();
         newResponsible.setClient(client);
         return repository.save(newResponsible);
     }
@@ -41,7 +39,7 @@ public class ResponsibleService {
 
     public void deleteById(Long id) {
         ResponsibleResponse responsible = this.findById(id);
-        repository.deleteById(responsible.getId());
+        repository.deleteById(responsible.id());
     }
 
     @Transactional

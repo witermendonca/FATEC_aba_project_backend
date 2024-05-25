@@ -1,11 +1,10 @@
 package com.inclusivamenteaba.api.service;
 
 
-import com.inclusivamenteaba.api.dto.NewProtocolRequest;
-import com.inclusivamenteaba.api.dto.ProtocolResponse;
-import com.inclusivamenteaba.api.entity.Application;
-import com.inclusivamenteaba.api.entity.Client;
-import com.inclusivamenteaba.api.entity.Protocol;
+import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.protocol.Protocol;
+import com.inclusivamenteaba.api.entity.protocol.NewProtocolRequest;
+import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
 import com.inclusivamenteaba.api.repository.ProtocolRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -24,9 +23,9 @@ public class ProtocolService {
     private final ClientService clientService;
 
     @Transactional
-    public Protocol create(NewProtocolRequest protocolDTO) {
-        Client client = clientService.findById(protocolDTO.getIdClient());
-        Protocol protocol = protocolDTO.toModel(client);
+    public Protocol create(NewProtocolRequest newProtocol) {
+        Client client = clientService.findById(newProtocol.idClient());
+        Protocol protocol = newProtocol.toModel(client);
         return repository.save(protocol);
     }
 

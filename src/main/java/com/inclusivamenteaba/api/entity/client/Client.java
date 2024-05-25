@@ -1,6 +1,9 @@
-package com.inclusivamenteaba.api.entity;
+package com.inclusivamenteaba.api.entity.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.inclusivamenteaba.api.entity.address.Address;
+import com.inclusivamenteaba.api.entity.protocol.Protocol;
+import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.enums.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -45,7 +48,7 @@ public class Client {
     private String processingInformation;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -82,6 +85,7 @@ public class Client {
             String medicinesInUse,
             String processingInformation,
             String createdBy,
+            LocalDateTime createdAt,
             Address address,
             List<Responsible> responsible
     ) {
@@ -96,6 +100,7 @@ public class Client {
         this.processingInformation = processingInformation;
         this.createdBy = createdBy;
         this.gender = gender;
+        this.createdAt = createdAt;
         this.address = address;
         this.setResponsible(responsible);
     }

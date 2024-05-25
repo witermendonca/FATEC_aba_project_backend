@@ -1,9 +1,9 @@
 package com.inclusivamenteaba.api.service;
 
-import com.inclusivamenteaba.api.dto.ApplicationResponse;
-import com.inclusivamenteaba.api.dto.NewApplicationRequest;
-import com.inclusivamenteaba.api.entity.Application;
-import com.inclusivamenteaba.api.entity.Protocol;
+import com.inclusivamenteaba.api.entity.application.NewApplicationRequest;
+import com.inclusivamenteaba.api.entity.application.Application;
+import com.inclusivamenteaba.api.entity.application.ApplicationResponse;
+import com.inclusivamenteaba.api.entity.protocol.Protocol;
 import com.inclusivamenteaba.api.repository.ApplicationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class ApplicationService {
 
     @Transactional
     public Application create(NewApplicationRequest applicationRequest) {
-        Protocol protocol = protocolService.findById(applicationRequest.getProtocolId());
+        Protocol protocol = protocolService.findById(applicationRequest.protocolId());
         Application application = applicationRequest.toModel(protocol);
         return repository.save(application);
     }
