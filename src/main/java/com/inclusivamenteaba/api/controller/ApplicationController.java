@@ -24,7 +24,7 @@ public class ApplicationController {
     public ResponseEntity create(@RequestBody @Valid NewApplicationRequest applicationDTO, UriComponentsBuilder uriBuilder) {
         System.out.println(applicationDTO);
         Application application = service.create(applicationDTO);
-        var uri = uriBuilder.path("/{id}").buildAndExpand(application.getId()).toUri();
+        var uri = uriBuilder.path("/application/{id}").buildAndExpand(application.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

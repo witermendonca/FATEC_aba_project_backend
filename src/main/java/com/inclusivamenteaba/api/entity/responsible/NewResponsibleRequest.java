@@ -2,6 +2,7 @@ package com.inclusivamenteaba.api.entity.responsible;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,9 @@ public record NewResponsibleRequest(
         @NotBlank(message = "Telefone é obrigatório")
         String telephone,
         LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        LocalDateTime updatedAt,
+        @NotNull(message = "Id do cliente é obrigatório")
+        Long idClient
 ) {
 
     public Responsible toModel() {

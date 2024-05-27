@@ -1,6 +1,7 @@
 package com.inclusivamenteaba.api.service;
 
 import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
 import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
 import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.entity.responsible.ResponsibleResponse;
@@ -47,5 +48,10 @@ public class ResponsibleService {
         Responsible responsible = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Responsible not found"));
         responsible.updateData(updateData);
         return repository.save(responsible);
+    }
+
+    public List<ResponsibleResponse> findAllByClientId(Long id) {
+        List<Responsible> responsibles = repository.findByClientId(id);
+        return responsibles.stream().map(ResponsibleResponse::new).collect(Collectors.toList());
     }
 }

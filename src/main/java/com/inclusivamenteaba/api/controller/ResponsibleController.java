@@ -1,6 +1,7 @@
 package com.inclusivamenteaba.api.controller;
 
 import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
 import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
 import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.entity.responsible.ResponsibleResponse;
@@ -24,11 +25,11 @@ public class ResponsibleController {
     private final ResponsibleService responsibleService;
     private final ClientService clientService;
 
-    @PostMapping("/{id}")
-    public ResponseEntity create(@PathVariable Long id, @RequestBody @Valid NewResponsibleRequest responsible, UriComponentsBuilder uriBuilder) {
-        Client client = clientService.findById(id);
+    @PostMapping()
+    public ResponseEntity create( @RequestBody @Valid NewResponsibleRequest responsible, UriComponentsBuilder uriBuilder) {
+        Client client = clientService.findById(responsible.idClient());
         Responsible newResponsible = responsibleService.create(client, responsible);
-        var uri = uriBuilder.path("/{id}").buildAndExpand(newResponsible.getId()).toUri();
+        var uri = uriBuilder.path("/responsible/{id}").buildAndExpand(newResponsible.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
@@ -40,6 +41,11 @@ public class ResponsibleController {
     @GetMapping("/{id}")
     public ResponsibleResponse findById(@PathVariable Long id) {
         return responsibleService.findById(id);
+    }
+
+    @GetMapping("/client/{id}")
+    public List<ResponsibleResponse> findAllByClientId(@PathVariable Long id) {
+        return responsibleService.findAllByClientId(id);
     }
 
     @PutMapping("/{id}")

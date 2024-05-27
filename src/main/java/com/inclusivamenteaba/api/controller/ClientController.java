@@ -25,7 +25,7 @@ public class ClientController {
     @PostMapping
     public ResponseEntity<Client> create(@RequestBody @Valid ClientRequest newClientRequest, UriComponentsBuilder uriBuilder) {
         Client client = clientService.create(newClientRequest);
-        var uri = uriBuilder.path("/{id}").buildAndExpand(client.getId()).toUri();
+        var uri = uriBuilder.path("/clients/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

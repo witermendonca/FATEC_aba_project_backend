@@ -24,7 +24,7 @@ public class ProtocolController {
     @PostMapping
     public ResponseEntity create(@RequestBody @Valid NewProtocolRequest newProtocol, UriComponentsBuilder uriBuilder) {
         Protocol protocol = service.create(newProtocol);
-        var uri = uriBuilder.path("/{id}").buildAndExpand(protocol.getId()).toUri();
+        var uri = uriBuilder.path("/protocol/{id}").buildAndExpand(protocol.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
