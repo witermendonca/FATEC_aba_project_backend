@@ -2,9 +2,9 @@ package com.inclusivamenteaba.api.service;
 
 
 import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.protocol.ItemListProtocolResponse;
 import com.inclusivamenteaba.api.entity.protocol.Protocol;
 import com.inclusivamenteaba.api.entity.protocol.NewProtocolRequest;
-import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
 import com.inclusivamenteaba.api.repository.ProtocolRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -29,18 +29,18 @@ public class ProtocolService {
         return repository.save(protocol);
     }
 
-    public List<ProtocolResponse> findAll() {
+    public List<ItemListProtocolResponse> findAll() {
         List<Protocol> protocols = repository.findAll();
-        return protocols.stream().map(ProtocolResponse::new).collect(Collectors.toList());
+        return protocols.stream().map(ItemListProtocolResponse::new).collect(Collectors.toList());
     }
 
     public Protocol findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Protocol not found"));
     }
 
-    public List<ProtocolResponse> findAllByClientId(Long clientId) {
+    public List<ItemListProtocolResponse> findAllByClientId(Long clientId) {
         List<Protocol> protocols = repository.findByClientId(clientId);
-        return protocols.stream().map(ProtocolResponse::new).collect(Collectors.toList());
+        return protocols.stream().map(ItemListProtocolResponse::new).collect(Collectors.toList());
     }
 
     public void deleteById(Long id) {

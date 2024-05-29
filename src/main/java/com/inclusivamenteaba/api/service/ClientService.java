@@ -1,7 +1,9 @@
 package com.inclusivamenteaba.api.service;
 
 import com.inclusivamenteaba.api.entity.client.Client;
+import com.inclusivamenteaba.api.entity.client.ClientDetailsResponse;
 import com.inclusivamenteaba.api.entity.client.ClientRequest;
+import com.inclusivamenteaba.api.entity.client.ItemListClientResponse;
 import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.repository.ClientRepository;
 import com.inclusivamenteaba.api.repository.ResponsibleRepository;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -29,8 +32,9 @@ public class ClientService {
         return repository.save(client);
     }
 
-    public List<Client> findAll() {
-        return repository.findAll();
+    public List<ItemListClientResponse> findAll() {
+        List<Client> clients = repository.findAll();
+        return clients.stream().map(ItemListClientResponse::new).collect(Collectors.toList());
     }
 
     public Client findById(Long id) {
@@ -43,7 +47,7 @@ public class ClientService {
     }
 
     @Transactional
-    public Client updateClientAndResponsible(Long clientId, Client clientData) {
+    public ClientDetailsResponse updateClientAndResponsible(Long clientId, Client clientData) {
         Client client = this.findById(clientId);
         client.updateData(clientData);
 
@@ -64,8 +68,8 @@ public class ClientService {
                 }
             }
         }
-
-        return repository.save(client);
+        Client client1 = repository.save(client);
+        return new ClientDetailsResponse(client1);
     }
 
 }

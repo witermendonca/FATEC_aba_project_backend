@@ -2,12 +2,11 @@ package com.inclusivamenteaba.api.entity.responsible;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
 
-public record NewResponsibleRequest(
+public record NewResponsibleClientRequest(
         @NotBlank(message = "Nome é obrigatório")
         String name,
         @NotBlank(message = "CPF é obrigatório")
@@ -19,13 +18,9 @@ public record NewResponsibleRequest(
         @NotBlank
         String degreeOfKinship,
         @NotBlank(message = "Telefone é obrigatório")
-        String telephone,
-        @NotNull(message = "Id do cliente é obrigatório")
-        Long idClient
+        String telephone
 ) {
-
     public Responsible toModel() {
-        LocalDateTime now = LocalDateTime.now();
         return new Responsible(
                 name,
                 cpf,

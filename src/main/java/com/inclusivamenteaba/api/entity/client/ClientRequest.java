@@ -2,7 +2,7 @@ package com.inclusivamenteaba.api.entity.client;
 
 import com.inclusivamenteaba.api.entity.address.Address;
 import com.inclusivamenteaba.api.entity.address.NewAddressRequest;
-import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
+import com.inclusivamenteaba.api.entity.responsible.NewResponsibleClientRequest;
 import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.enums.Gender;
 import jakarta.validation.Valid;
@@ -39,14 +39,13 @@ public record ClientRequest(
         NewAddressRequest address,
         String createdBy,
         @Valid
-        @NotNull(message = "Responsável é obrigatório")
-        List<NewResponsibleRequest> responsible
+        List<NewResponsibleClientRequest> responsible
 ) {
         public Client toModel() {
                 LocalDateTime now = LocalDateTime.now();
                 Address addressEntity = address.toModel();
                 List<Responsible> responsibleEntity = responsible.stream()
-                        .map(NewResponsibleRequest::toModel)
+                        .map(NewResponsibleClientRequest::toModel)
                         .toList();
                 return new Client(
                         name, birthday, gender, email, cpf, telephone, educationLevel, medicalInformations,

@@ -41,14 +41,13 @@ public class Responsible {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Responsible(String name, String cpf, String email, String degreeOfKinship, String telephone, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Responsible(String name, String cpf, String email, String degreeOfKinship, String telephone, LocalDateTime createdAt) {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.degreeOfKinship = degreeOfKinship;
         this.telephone = telephone;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public void updateData(Responsible updatedResponsible) {

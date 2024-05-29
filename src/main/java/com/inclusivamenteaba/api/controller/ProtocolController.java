@@ -1,5 +1,6 @@
 package com.inclusivamenteaba.api.controller;
 
+import com.inclusivamenteaba.api.entity.protocol.ItemListProtocolResponse;
 import com.inclusivamenteaba.api.entity.protocol.Protocol;
 import com.inclusivamenteaba.api.entity.protocol.NewProtocolRequest;
 import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
@@ -29,7 +30,7 @@ public class ProtocolController {
     }
 
     @GetMapping
-    public List<ProtocolResponse> findAll() {
+    public List<ItemListProtocolResponse> findAll() {
         return service.findAll();
     }
 
@@ -40,7 +41,7 @@ public class ProtocolController {
     }
 
     @GetMapping("/client/{id}")
-    public List<ProtocolResponse> findAllByClientId(@PathVariable Long id) {
+    public List<ItemListProtocolResponse> findAllByClientId(@PathVariable Long id) {
         return service.findAllByClientId(id);
     }
 
