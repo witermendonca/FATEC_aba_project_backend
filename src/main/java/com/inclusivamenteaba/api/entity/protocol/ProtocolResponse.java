@@ -1,6 +1,7 @@
 package com.inclusivamenteaba.api.entity.protocol;
 
 import com.inclusivamenteaba.api.entity.application.ApplicationResponse;
+import com.inclusivamenteaba.api.entity.application.ItemListApplicationResponse;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,7 +14,7 @@ public record ProtocolResponse(
         @NotBlank String name,
         @NotNull LocalDateTime createdAt,
         @NotBlank String createdBy,
-        List<ApplicationResponse> applications
+        List<ItemListApplicationResponse> applications
 ) {
     public ProtocolResponse(Protocol protocol) {
         this(
@@ -22,7 +23,7 @@ public record ProtocolResponse(
                 protocol.getCreatedAt(),
                 protocol.getCreatedBy(),
                 protocol.getApplications().stream()
-                        .map(ApplicationResponse::new)
+                        .map(ItemListApplicationResponse::new)
                         .collect(Collectors.toList())
         );
     }
