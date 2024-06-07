@@ -14,7 +14,7 @@
 	<name>api</name>
 	<description>Api Rest da aplicação ABA instituto inclusivamente araras</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

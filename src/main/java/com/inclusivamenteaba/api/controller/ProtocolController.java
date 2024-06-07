@@ -41,7 +41,7 @@ public class ProtocolController {
     }
 
     @GetMapping("/client/{id}")
-    public List<ItemListProtocolResponse> findAllByClientId(@PathVariable Long id) {
+    public List<ProtocolResponse> findAllByClientId(@PathVariable Long id) {
         return service.findAllByClientId(id);
     }
 
