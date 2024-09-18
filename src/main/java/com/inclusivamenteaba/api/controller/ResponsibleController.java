@@ -1,7 +1,6 @@
 package com.inclusivamenteaba.api.controller;
 
 import com.inclusivamenteaba.api.entity.client.Client;
-import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
 import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
 import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.entity.responsible.ResponsibleResponse;
@@ -26,7 +25,7 @@ public class ResponsibleController {
     private final ClientService clientService;
 
     @PostMapping()
-    public ResponseEntity create( @RequestBody @Valid NewResponsibleRequest responsible, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UriComponentsBuilder> create( @RequestBody @Valid NewResponsibleRequest responsible, UriComponentsBuilder uriBuilder) {
         Client client = clientService.findById(responsible.idClient());
         Responsible newResponsible = responsibleService.create(client, responsible);
         var uri = uriBuilder.path("/responsible/{id}").buildAndExpand(newResponsible.getId()).toUri();

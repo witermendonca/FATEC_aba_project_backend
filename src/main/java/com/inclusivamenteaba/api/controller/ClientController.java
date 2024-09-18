@@ -25,21 +25,21 @@ public class ClientController {
     private final ClientService clientService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid ClientRequest newClientRequest, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UriComponentsBuilder> create(@RequestBody @Valid ClientRequest newClientRequest, UriComponentsBuilder uriBuilder) {
         Client client = clientService.create(newClientRequest);
         var uri = uriBuilder.path("/clients/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @GetMapping
-    public List<ItemListClientResponse> findAll() {
-        return clientService.findAll();
+    public ResponseEntity<List<ItemListClientResponse>> findAll() {
+        return ResponseEntity.ok(clientService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ClientDetailsResponse findById(@PathVariable Long id) {
+    public ResponseEntity<ClientDetailsResponse> findById(@PathVariable Long id) {
         Client client = clientService.findById(id);
-        return new ClientDetailsResponse(client);
+        return ResponseEntity.ok(new ClientDetailsResponse(client));
     }
 
     @PutMapping("/{id}")

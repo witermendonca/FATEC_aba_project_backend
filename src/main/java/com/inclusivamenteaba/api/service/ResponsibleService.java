@@ -1,7 +1,6 @@
 package com.inclusivamenteaba.api.service;
 
 import com.inclusivamenteaba.api.entity.client.Client;
-import com.inclusivamenteaba.api.entity.protocol.ProtocolResponse;
 import com.inclusivamenteaba.api.entity.responsible.NewResponsibleRequest;
 import com.inclusivamenteaba.api.entity.responsible.Responsible;
 import com.inclusivamenteaba.api.entity.responsible.ResponsibleResponse;

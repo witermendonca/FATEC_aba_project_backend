@@ -21,7 +21,7 @@ public class ApplicationController {
     private final ApplicationService service;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid NewApplicationRequest applicationDTO, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UriComponentsBuilder> create(@RequestBody @Valid NewApplicationRequest applicationDTO, UriComponentsBuilder uriBuilder) {
         System.out.println(applicationDTO);
         Application application = service.create(applicationDTO);
         var uri = uriBuilder.path("/application/{id}").buildAndExpand(application.getId()).toUri();

@@ -25,7 +25,6 @@ public record NewResponsibleRequest(
 ) {
 
     public Responsible toModel() {
-        LocalDateTime now = LocalDateTime.now();
         return new Responsible(
                 name,
                 cpf,
