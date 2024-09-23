@@ -9,14 +9,16 @@ public record ItemListProtocolResponse(
         @NotNull Long id,
         @NotBlank String name,
         @NotNull LocalDateTime createdAt,
-        @NotBlank String createdBy
+        @NotBlank String createdBy,
+        @NotNull Long clientId
 ) {
     public ItemListProtocolResponse(Protocol protocol) {
         this(
                 protocol.getId(),
                 protocol.getName(),
                 protocol.getCreatedAt(),
-                protocol.getCreatedBy()
+                protocol.getCreatedBy(),
+                protocol.getClient().getId()
         );
     }
 }
