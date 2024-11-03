@@ -31,16 +31,16 @@ public class ClientService {
         Client client = newClientRequest.toModel();
         return repository.save(client);
     }
-
+    @Transactional
     public List<ItemListClientResponse> findAll() {
         List<Client> clients = repository.findAll();
         return clients.stream().map(ItemListClientResponse::new).collect(Collectors.toList());
     }
-
+    @Transactional
     public Client findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
     }
-
+    @Transactional
     public void deleteById(Long id) {
         Client client = this.findById(id);
         repository.deleteById(client.getId());

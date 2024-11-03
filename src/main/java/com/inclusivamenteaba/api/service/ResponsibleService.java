@@ -26,17 +26,17 @@ public class ResponsibleService {
         newResponsible.setClient(client);
         return repository.save(newResponsible);
     }
-
+    @Transactional
     public List<ResponsibleResponse> findAll() {
         List<Responsible> responsibles = repository.findAll();
         return responsibles.stream().map(ResponsibleResponse::new).collect(Collectors.toList());
     }
-
+    @Transactional
     public ResponsibleResponse findById(Long id) {
         Responsible responsible = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Responsible not found"));
         return new ResponsibleResponse(responsible);
     }
-
+    @Transactional
     public void deleteById(Long id) {
         ResponsibleResponse responsible = this.findById(id);
         repository.deleteById(responsible.id());
@@ -48,7 +48,7 @@ public class ResponsibleService {
         responsible.updateData(updateData);
         return repository.save(responsible);
     }
-
+    @Transactional
     public List<ResponsibleResponse> findAllByClientId(Long id) {
         List<Responsible> responsibles = repository.findByClientId(id);
         return responsibles.stream().map(ResponsibleResponse::new).collect(Collectors.toList());

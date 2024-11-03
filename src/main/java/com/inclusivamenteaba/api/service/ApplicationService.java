@@ -26,17 +26,17 @@ public class ApplicationService {
         Application application = applicationRequest.toModel(protocol);
         return repository.save(application);
     }
-
+    @Transactional
     public List<ApplicationResponse> findAll() {
         List<Application> applications = repository.findAll();
         return applications.stream().map(ApplicationResponse::new).collect(Collectors.toList());
     }
-
+    @Transactional
     public ApplicationResponse findById(Long id) {
         Application application = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Application not found"));
         return new ApplicationResponse(application);
     }
-
+    @Transactional
     public List<ApplicationResponse> findAllByProtocolId(Long protocolId) {
         List<Application> applications =  repository.findByProtocolId(protocolId);
         return applications.stream().map(ApplicationResponse::new).collect(Collectors.toList());

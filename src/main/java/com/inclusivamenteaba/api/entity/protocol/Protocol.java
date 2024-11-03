@@ -33,7 +33,7 @@ public class Protocol {
     @JsonIgnoreProperties("protocol")
     private Client client;
 
-    @OneToMany(mappedBy = "protocol", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "protocol", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("protocol")
     private List<Application> applications;
 

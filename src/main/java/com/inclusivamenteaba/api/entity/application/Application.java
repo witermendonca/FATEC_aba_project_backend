@@ -38,7 +38,7 @@ public class Application {
     @Column(name = "reason_abortion")
     private String reasonAbortion;
 
-    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("application")
     private List<Attempt> attempts;
 

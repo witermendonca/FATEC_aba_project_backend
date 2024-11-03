@@ -29,21 +29,21 @@ public class ProtocolService {
         Protocol protocol = newProtocol.toModel(client);
         return repository.save(protocol);
     }
-
+    @Transactional
     public List<ItemListProtocolResponse> findAll() {
         List<Protocol> protocols = repository.findAll();
         return protocols.stream().map(ItemListProtocolResponse::new).collect(Collectors.toList());
     }
-
+    @Transactional
     public Protocol findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Protocol not found"));
     }
-
+    @Transactional
     public List<ProtocolResponse> findAllByClientId(Long clientId) {
         List<Protocol> protocols = repository.findByClientId(clientId);
         return protocols.stream().map(ProtocolResponse::new).collect(Collectors.toList());
     }
-
+    @Transactional
     public void deleteById(Long id) {
         Protocol protocol = this.findById(id);
         repository.deleteById(protocol.getId());

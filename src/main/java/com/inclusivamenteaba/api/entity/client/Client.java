@@ -65,11 +65,11 @@ public class Client {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("client")
     private List<Responsible> responsible;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("client")
     private List<Protocol> protocols;
 
