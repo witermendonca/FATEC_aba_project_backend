@@ -1,0 +1,20 @@
+<configuration>
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <loki4j>
+            <batchSize>100</batchSize>
+            <batchTimeoutMs>2000</batchTimeoutMs>
+            <lokiUrl>http://localhost:3100/loki/api/v1/push</lokiUrl>
+            <labels>
+                <label name="app" value="spring-boot-app"/>
+                <label name="host" value="${HOSTNAME}"/>
+            </labels>
+        </loki4j>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="LOKI"/>
+    </root>
+</configuration>
