@@ -1,0 +1,13 @@
+services:
+  # Para acessar a documentação via swagger http://localhost:8080/swagger-ui/index.html#/
+  # Para acessar actuator da aplicação http://localhost:8080/actuator/prometheus
+  app:
+      build: .
+      ports:
+        - "8080:8080"
+      environment:
+          SPRING_DATASOURCE_URL: # Informar a URL do banco
+          SPRING_DATASOURCE_USERNAME: # Informar o username do banco
+          SPRING_DATASOURCE_PASSWORD: # Informar a senha do banco
+          SPRING_JPA_HIBERNATE_DDL_AUTO: none
+          SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
